@@ -81,7 +81,7 @@ function validateItem(body) {
   const seen = new Set();
   for (const a of Array.isArray(body.audios) ? body.audios : []) {
     const lang = String(a.lang || '').toLowerCase();
-    if (!LANGS[lang]) throw new Error('Audio language must be Hindi, English or Telugu.');
+    if (!LANGS[lang]) throw new Error('Audio language must be Hindi, English, Telugu or Japanese.');
     const url = cleanUrl(a.url, `${LANGS[lang].label} audio URL`);
     if (!url) continue; // empty row, skip
     if (seen.has(lang)) throw new Error(`${LANGS[lang].label} audio was added twice.`);

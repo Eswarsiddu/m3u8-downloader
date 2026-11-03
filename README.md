@@ -3,7 +3,7 @@
 Paste a `master.m3u8` (or individual video/audio links), store it with a name and optional TMDB / IMDb links, and download it in the background with ffmpeg.
 
 - **Video:** the highest-resolution variant only.
-- **Audio:** Hindi, English and Telugu only. Any other language is ignored.
+- **Audio:** Hindi, English, Telugu and Japanese only. Any other language is ignored.
 - **Output:** one `.mkv` per item with the audio tracks labelled (`hin`, `eng`, `tel`), saved to `DOWNLOAD_DIR`.
 - Items are kept in SQLite (`data/downloads.db`). The queue survives restarts; an interrupted item restarts from the beginning.
 
@@ -34,7 +34,7 @@ Useful: `pm2 logs stream-downloader`, `pm2 restart stream-downloader`.
 
 ## Using it
 
-1. **Paste the whole master.m3u8** into the top box. The video URL and Hindi/English/Telugu audio URLs fill in automatically.
+1. **Paste the whole master.m3u8** into the top box. The video URL and Hindi/English/Telugu/Japanese audio URLs fill in automatically.
    Or skip that and type the video URL and add audio rows by hand.
 2. Enter a **name**, or paste a **TMDB link** and the name fills in as `Title (Year)`. No key is needed: themoviedb.org blocks scripted page fetches, so the name comes from Wikidata (looked up by the TMDB id), and if that has no entry it is guessed from the link text. For the most complete results, set `TMDB_READ_KEY` (your v4 "API Read Access Token") and/or `TMDB_API_KEY` (your v3 "API Key") from themoviedb.org/settings/api. The read token is tried first, then the API key, then Wikidata. IMDb links are stored but not looked up.
 3. **Add & start download** queues it now; **Save only** stores it so you can start it later.

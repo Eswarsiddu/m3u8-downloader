@@ -1,7 +1,7 @@
 'use strict';
 
 const $ = (id) => document.getElementById(id);
-const LANGS = { hi: 'Hindi', en: 'English', te: 'Telugu' };
+const LANGS = { hi: 'Hindi', en: 'English', te: 'Telugu', ja: 'Japanese' };
 
 function h(tag, props, ...children) {
   const el = document.createElement(tag);

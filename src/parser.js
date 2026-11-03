@@ -5,12 +5,14 @@ const LANGS = {
   hi: { code: 'hi', iso3: 'hin', label: 'Hindi', order: 0 },
   en: { code: 'en', iso3: 'eng', label: 'English', order: 1 },
   te: { code: 'te', iso3: 'tel', label: 'Telugu', order: 2 },
+  ja: { code: 'ja', iso3: 'jpn', label: 'Japanese', order: 3 },
 };
 
 const ALIASES = {
   hi: 'hi', hin: 'hi', hindi: 'hi', 'हिन्दी': 'hi', 'हिंदी': 'hi',
   en: 'en', eng: 'en', english: 'en',
   te: 'te', tel: 'te', telugu: 'te', 'తెలుగు': 'te',
+  ja: 'ja', jpn: 'ja', jp: 'ja', japanese: 'ja', '日本語': 'ja',
 };
 
 function normalizeLang(...candidates) {

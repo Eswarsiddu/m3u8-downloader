@@ -35,6 +35,23 @@ test('keeps only Hindi, English and Telugu audio, in that order, and reports the
   assert.deepStrictEqual(r.ignored.map((i) => i.name), ['Tamil']);
 });
 
+test('recognises Japanese by code, region code, name or native name, and orders it last', () => {
+  const m = (attrs, n) => `#EXT-X-MEDIA:TYPE=AUDIO,GROUP-ID="a",${attrs},URI="${H}/a${n}.m3u8"`;
+  const text = [
+    '#EXTM3U',
+    m('NAME="Japanese",LANGUAGE="ja"', 1),
+    m('NAME="日本語",LANGUAGE="ja-JP"', 2), // duplicate language: first one wins
+    m('NAME="English",LANGUAGE="en"', 3),
+    '#EXT-X-STREAM-INF:BANDWIDTH=1,RESOLUTION=100x100',
+    `${H}/v.m3u8`,
+  ].join('\n');
+  const r = parseMaster(text);
+  assert.deepStrictEqual(r.audios.map((a) => a.lang), ['en', 'ja']);
+  assert.strictEqual(r.audios[1].url, `${H}/a1.m3u8`);
+  assert.strictEqual(parseMaster(text.replace('LANGUAGE="ja"', 'LANGUAGE="jpn"')).audios[1].lang, 'ja');
+  assert.strictEqual(parseMaster(`#EXTM3U\n${m('NAME="日本語"', 9)}\n#EXT-X-STREAM-INF:BANDWIDTH=1,RESOLUTION=1x1\n${H}/v.m3u8`).audios[0].lang, 'ja');
+});
+
 test('rejects text that is not a playlist', () => {
   assert.throws(() => parseMaster('hello'), /EXTM3U/);
 });
