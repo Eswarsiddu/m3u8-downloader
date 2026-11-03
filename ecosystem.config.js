@@ -1,4 +1,8 @@
 // Start with:  pm2 start ecosystem.config.js
+//
+// Settings (PORT, DOWNLOAD_DIR, MAX_CONCURRENT, APP_PASSWORD, TMDB keys, ...) live in the .env file next to
+// server.js - see .env.example. Don't repeat them here: variables set by pm2 override .env, which is how a
+// stale PORT here used to win over the one in .env.
 module.exports = {
   apps: [
     {
@@ -11,17 +15,6 @@ module.exports = {
       kill_timeout: 10000,
       env: {
         NODE_ENV: 'production',
-        PORT: 3000,
-        // Folder where finished files are saved:
-        DOWNLOAD_DIR: '/home/ubuntu/downloads',
-        // How many items download at the same time:
-        MAX_CONCURRENT: 1,
-        // TMDB name lookup (optional; without them Wikidata is used). You can also put these in a .env file.
-        // TMDB_READ_KEY: 'your TMDB "API Read Access Token" (v4, starts with eyJ)',
-        // TMDB_API_KEY: 'your TMDB "API Key" (v3)',
-        // Turn on a login prompt (strongly recommended on a public server):
-        // APP_USER: 'admin',
-        // APP_PASSWORD: 'change-me',
       },
     },
   ],

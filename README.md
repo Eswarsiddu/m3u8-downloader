@@ -20,7 +20,7 @@ cd cartoon_downloader
 npm install --omit=dev
 ```
 
-Edit `ecosystem.config.js`: set `DOWNLOAD_DIR`, and **set `APP_USER` / `APP_PASSWORD`** if the port is reachable from the internet (without a password, anyone can queue downloads on your server).
+Create a `.env` file from the example and edit it: `cp .env.example .env`. Set `PORT`, `DOWNLOAD_DIR`, and **`APP_USER` / `APP_PASSWORD`** if the port is reachable from the internet (without a password, anyone can queue downloads on your server). Keep settings only in `.env`; variables set in `ecosystem.config.js` or the shell override it.
 
 ```bash
 pm2 start ecosystem.config.js
