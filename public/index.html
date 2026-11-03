@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stream Downloader</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <h1>Stream Downloader</h1>
+    <span id="cfg" class="muted"></span>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>Add download</h2>
+
+      <label class="field">
+        <span>Paste master.m3u8 <em class="muted">(optional &mdash; detects the best video + Hindi / English / Telugu audio)</em></span>
+        <textarea id="master" rows="4" placeholder="#EXTM3U&#10;#EXT-X-MEDIA:TYPE=AUDIO,..."></textarea>
+      </label>
+      <div id="detect" class="detect" hidden></div>
+
+      <form id="form" autocomplete="off">
+        <label class="field">
+          <span>Name *</span>
+          <input id="name" required maxlength="200" placeholder="e.g. Doraemon S01E01">
+        </label>
+
+        <div class="row">
+          <label class="field">
+            <span>TMDB link <em class="muted">(optional &mdash; fills the name)</em></span>
+            <input id="tmdb" type="url" placeholder="https://www.themoviedb.org/movie/603-the-matrix">
+            <small id="tmdbHint" class="muted" hidden></small>
+          </label>
+          <label class="field">
+            <span>IMDb link <em class="muted">(optional)</em></span>
+            <input id="imdb" type="url" placeholder="https://www.imdb.com/title/...">
+          </label>
+        </div>
+
+        <label class="field">
+          <span>Video URL * <em id="resTag" class="tag" hidden></em></span>
+          <input id="video" required type="url" placeholder="https://.../index-v1-a1.m3u8?...">
+        </label>
+
+        <div class="field">
+          <span>Audio URLs <em class="muted">(Hindi, English, Telugu only)</em></span>
+          <div id="audios"></div>
+          <button type="button" id="addAudio" class="ghost">+ Add audio</button>
+        </div>
+
+        <details id="advanced">
+          <summary>Request headers <span class="muted">(needed if the download gets 403 Forbidden)</span></summary>
+          <label class="field">
+            <span>Paste what your browser sends</span>
+            <textarea id="headers" rows="4" spellcheck="false"
+              placeholder="In Chrome: DevTools &rarr; Network &rarr; click the .m3u8 request &rarr; right-click &rarr; Copy &rarr; Copy as cURL, then paste it here.&#10;Or type lines like:&#10;Referer: https://...&#10;Origin: https://..."></textarea>
+            <small class="muted">Sent with every playlist and segment request. Remembered in this browser for the next item.</small>
+          </label>
+        </details>
+
+        <div id="formError" class="error" hidden></div>
+
+        <div class="actions">
+          <button type="submit" id="submitStart" class="primary">Add &amp; start download</button>
+          <button type="button" id="submitSave">Save only</button>
+          <button type="button" id="clearBtn" class="ghost">Clear</button>
+        </div>
+      </form>
+    </section>
+
+    <section>
+      <h2>Downloads</h2>
+      <div id="list"></div>
+      <p id="empty" class="muted" hidden>Nothing yet.</p>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
